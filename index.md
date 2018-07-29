@@ -87,7 +87,7 @@ deb http://chip.lotek.fr/chip/debian/pocketchip jessie main
  — CHIPMAS [github](https://github.com/nyboer/CHIPMAS), [hackter.io](https://chip.hackster.io/11802/c-h-i-p-midi-arpeggiating-synth-e311ab), CHIP MIDI Arpeggiating Synthesizer is a simple Pure Data synthesizer. Wavetable synth, control by OSC/MIDI. 
 
  — [pocket-home freedesktop launcher](https://github.com/centuryglass/PocketCHIP-pocket-home), application launcher from pocket-home marshmallow that follows the freedesktop standard
-:w
+
 
  — [pocketInstaller](https://github.com/IkerGarcia/PocketInstaller), a GUI to install emulators/games
 

@@ -1,3 +1,5 @@
+# chip.lotek.fr — NTC CHIP mirrors & resources
+
 <pre>
 ._______ .___.__  .___ ._______ 
 :_.  ___\:   |  \ : __|: ____  |
@@ -8,10 +10,10 @@
  :                              
 </pre>
 
-(WIP as of 2018-07-31)
+(last modification: 2018-08-09)
 ***
 
-## archived/backups
+## archives/backups/mirrors
 
 - [NTC debian Jessie repository apt mirror](http://chip.lotek.fr/chip/) 
 
@@ -20,46 +22,50 @@
 deb http://chip.lotek.fr/chip/debian/repo jessie main
 deb http://chip.lotek.fr/chip/debian/pocketchip jessie main
 </pre>
-(pocketchip repo packages are PocketCHIP's specifics)
+(The 2nd repository -2nd line- contains PocketCHIP's specific packages, not CHIP ones, only use it with the PocketCHIP.)
 
-- [Browsable NTC/CHIP documentation](/docs.getchip.com/)
+- [Online NTC/CHIP documentation](/docs.getchip.com/)
 - [cli-images](/cli-images/) 
 - [chp-images](/chp-images/) - partial
 - ...
-- [CHIP Flasher Chrome extension](/misc-files/CHIP%20Flasher%205.0.0_0.zip)
-- ...
-- ...
+- [CHIP Flasher Chrome extension](/misc-files/CHIP%20Flasher%205.0.0_0.zip) 
+>// Quick how to: While flash.getchip.com is still online, go to chrome://extensions - enable dev mode, unzip and drag&drop the extension -> 2018-08-06: The web flasher doesn't seem to work anymore, follow CLI/terminal guides.
 
-> (Other backups to be made available a bit later.)
+
 
 ***
 
 ### CHIP links
+
+  
  — [JF Possibilities' NTC mirror](http://chip.jfpossibilities.com/)
- & the forum thread ["planning for the inevitable"](https://bbs.nextthing.co/t/planning-for-the-inevitable/19958) // ([WARC](misc-files/bbs-ntc-planning-for-the-inevitable-thread.warc.gz))
+ / (See [forum](https://bbs.nextthing.co/t/planning-for-the-inevitable/19958), [warc](misc-files/bbs-ntc-planning-for-the-inevitable-thread.warc.gz))
 
  — **[chip community wiki](http://www.chip-community.org/index.php/Main_Page)**
 
- — [NTC's documentation on the Wayback Machine](https://web.archive.org/web/20161119024310/http://docs.getchip.com:80/) 
-
- — *[C.H.I.P. Flash Collection @ archive.org](https://archive.org/details/C.h.i.p.FlashCollection) & [other](https://archive.org/search.php?query=creator%3A%22Next+Thing%2C+Co.%22)*
+ — *[C.H.I.P. Flash Collection @ archive.org](https://archive.org/details/C.h.i.p.FlashCollection) & [more](https://archive.org/search.php?query=creator%3A%22Next+Thing%2C+Co.%22)*
 
  — *[NTC Git Archive](https://archive.org/details/NextThingCo.GitArchive)*
 
+ — [How to Flash C.H.I.P Offline](https://yoursunny.com/t/2018/CHIP-flash-offline/) / ([simple stupid .html copy](yoursunny.com-how-to-flash-CHIP-offline.html))
 
-> — [How to Flash C.H.I.P Offline](https://yoursunny.com/t/2018/CHIP-flash-offline/) / ([simple stupid .html copy](yoursunny.com-how-to-flash-CHIP-offline.html))
->
-> — [Reflashing The PocketCHIP Without The Online Flasher (On Linux)](/misc-files/Reflashing%20The%20PocketCHIP%20Without%20The%20Online%20Flasher%20On%20Linux.pdf) / ([og thread](https://bbs.nextthing.co/t/reflashing-the-pocketchip-without-the-online-flasher-on-linux/20614/4))
->
+ — [Reflashing The PocketCHIP Without The Online Flasher (On Linux) - pdf](/misc-files/Reflashing%20The%20PocketCHIP%20Without%20The%20Online%20Flasher%20On%20Linux.pdf) / ([og thread](https://bbs.nextthing.co/t/reflashing-the-pocketchip-without-the-online-flasher-on-linux/20614/4))
+
+ — [CHIP_IO](https://github.com/xtacocorex/CHIP_IO), A CHIP IO library for Python: IO+PWM+SPWM+ADC+Utilities
+
+ — [NTC's documentation on the Wayback Machine](https://web.archive.org/web/20161119024310/http://docs.getchip.com:80/) // or download the [archive file](/misc-files/docs.getchip.com.tar.bz2)
+
+
+
 > — [linux-sunxi wiki for Allwinner SoCs](https://linux-sunxi.org/Main_Page)
 >
 > — [awesome-chip](https://github.com/Project-chip-crumbs/awesome-chip) GH page
 >
-> — [kaplan2539 unofficial's kernel & repo](https://github.com/kaplan2539/CHIP-Debian-Kernel) - ([forum thread](https://bbs.nextthing.co/t/new-kernel-4-4-138/20894)) // [personal mirror repo](/kaplan2539-CHIP-Debian-Kernel/) 
+> — [kaplan2539 unofficial's kernel & repo](https://github.com/kaplan2539/CHIP-Debian-Kernel) - ([forum thread](https://bbs.nextthing.co/t/new-kernel-4-4-138/20894)) // [personal mirror repo](/kaplan2539-CHIP-Debian-Kernel/) (2018-28-07) // Not tested on a pCHIP?
 >
 > & [How to compile just one kernel module](https://yoursunny.com/t/2018/one-kernel-module/) / ([simple stupid .html copy](yoursunny.com-one-kernel-module.html))
 >
-> — [v10lator's kernel repo](https://chiprepo.home.v10lator.de/) - ([forum thread](https://bbs.nextthing.co/t/release-alternative-community-driven-kernel/18818)) // [info txt](v10lator-kernel.txt) / [personal mirror repo](/v10lator-kernel/) // ([WARC](misc-files/bbs-ntc-release-alternative-community-driven-kernel-18818.warc.gz)) // i think it hasn't been tested on a pCHIP & *won't work on a pCHIP*
+> — [v10lator's kernel repo](https://chiprepo.home.v10lator.de/) - ([forum thread](https://bbs.nextthing.co/t/release-alternative-community-driven-kernel/18818)) // [info txt](v10lator-kernel.txt) / [personal mirror repo](/v10lator-kernel/) (2018-28-07) // ([WARC](misc-files/bbs-ntc-release-alternative-community-driven-kernel-18818.warc.gz)) // i think it hasn't been tested on a pCHIP & *won't work on a pCHIP*
 >
 > — [a personal HOWTO to compile the Linux kernel for Chip](http://www.raspibo.org/wiki/index.php/Compile_the_Linux_kernel_for_Chip:_my_personal_HOWTO) - ([WBM](https://web.archive.org/web/20180731160444/http://www.raspibo.org/wiki/index.php/Compile_the_Linux_kernel_for_Chip:_my_personal_HOWTO)) & [on the CHIP itself](http://www.raspibo.org/wiki/index.php/HOW-TO_compile_Chip%27s_Linux_kernel_and_modules_on_Chip_itself)
 >
@@ -88,7 +94,7 @@ deb http://chip.lotek.fr/chip/debian/pocketchip jessie main
 
  — CHIPMAS [github](https://github.com/nyboer/CHIPMAS), [hackter.io](https://chip.hackster.io/11802/c-h-i-p-midi-arpeggiating-synth-e311ab), CHIP MIDI Arpeggiating Synthesizer is a simple Pure Data synthesizer. Wavetable synth, control by OSC/MIDI. 
 
- — [pocket-home freedesktop launcher](https://github.com/centuryglass/PocketCHIP-pocket-home), application launcher from pocket-home marshmallow that follows the freedesktop standard
+ — [pocket-home freedesktop launcher](https://github.com/centuryglass/PocketCHIP-pocket-home), application launcher that follows the freedesktop standard
 
 
  — [pocketInstaller](https://github.com/IkerGarcia/PocketInstaller), a GUI to install emulators/games
@@ -97,9 +103,6 @@ deb http://chip.lotek.fr/chip/debian/pocketchip jessie main
 
  — [PocketDESK](https://github.com/AllGray/PocketDesk), unify Desktop GUI & PocketHome
 
- — [chip-processing](https://github.com/Lana-chan/chip-processing), Processing 3+ sketches optimized for the PocketCHIP 
+— [Running Processing on NTC's CHIP](https://github.com/processing/processing/wiki/C.H.I.P.) + [Processing 3+ sketches optimized for the PocketCHIP](https://github.com/Lana-chan/chip-processing)
 
 
-
-
-***

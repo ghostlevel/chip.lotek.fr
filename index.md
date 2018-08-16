@@ -1,4 +1,4 @@
-# chip.lotek.fr — NTC CHIP mirrors & resources
+# chip.lotek.fr — NTC's CHIP mirrors & resources
 
 <pre>
 ._______ .___.__  .___ ._______ 
@@ -10,26 +10,42 @@
  :                              
 </pre>
 
-(last modification: 2018-08-09)
+(latest modification: 2018-08-16)
 ***
 
 ## archives/backups/mirrors
 
-- [NTC debian Jessie repository apt mirror](http://chip.lotek.fr/chip/) 
+- [mirror of NTC's CHIP .deb repositories](http://chip.lotek.fr/chip/) (Debian Jessie)
 
-> for your /etc/apt/sources.list, you can use
+for your "/etc/apt/sources.list", you can use
+
 <pre>
 deb http://chip.lotek.fr/chip/debian/repo jessie main
 deb http://chip.lotek.fr/chip/debian/pocketchip jessie main
 </pre>
-(The 2nd repository -2nd line- contains PocketCHIP's specific packages, not CHIP ones, only use it with the PocketCHIP.)
+
+>(The 2nd repository -2nd line- contains PocketCHIP's specific packages.)
+
+
+You should also replace the nextthing.co url in "/etc/apt/preferences" & change it to
+<pre>
+Package: *
+Pin: origin chip.lotek.fr
+Pin-Priority: 1050
+</pre>
+
+> If Pico-8/another software crashes with SDL errors after you used this repo, modify '/etc/apt/preferences' as above & *sudo apt upgrade* should fix it.
+
+>(Thanks [jfp](http://chip.jfpossibilities.com/))
 
 - [Online NTC/CHIP documentation](/docs.getchip.com/)
+
 - [cli-images](/cli-images/) 
+
 - [chp-images](/chp-images/) - partial
-- ...
-- [CHIP Flasher Chrome extension](/misc-files/CHIP%20Flasher%205.0.0_0.zip) 
->// Quick how to: While flash.getchip.com is still online, go to chrome://extensions - enable dev mode, unzip and drag&drop the extension -> 2018-08-06: The web flasher doesn't seem to work anymore, follow CLI/terminal guides.
+- [CHIP Flasher Chrome extension](/misc-files/CHIP%20Flasher%205.0.0_0.zip)
+
+> 2018-08-06: The online flasher doesn't work anymore, follow CLI/terminal guides do flash from a Linux machine.
 
 
 
@@ -40,6 +56,7 @@ deb http://chip.lotek.fr/chip/debian/pocketchip jessie main
   
  — [JF Possibilities' NTC mirror](http://chip.jfpossibilities.com/)
  / (See [forum](https://bbs.nextthing.co/t/planning-for-the-inevitable/19958), [warc](misc-files/bbs-ntc-planning-for-the-inevitable-thread.warc.gz))
+ >Bookmark the above link in case chip.lotek.fr goes down. And bookmark the community wiki, and— *more importantly: don't forget all the archive.org stuff, they will, or should, stay up longer than the rest of us.*
 
  — **[chip community wiki](http://www.chip-community.org/index.php/Main_Page)**
 
@@ -61,11 +78,11 @@ deb http://chip.lotek.fr/chip/debian/pocketchip jessie main
 >
 > — [awesome-chip](https://github.com/Project-chip-crumbs/awesome-chip) GH page
 >
-> — [kaplan2539 unofficial's kernel & repo](https://github.com/kaplan2539/CHIP-Debian-Kernel) - ([forum thread](https://bbs.nextthing.co/t/new-kernel-4-4-138/20894)) // [personal mirror repo](/kaplan2539-CHIP-Debian-Kernel/) (2018-28-07) // Not tested on a pCHIP?
+> — [kaplan2539 unofficial's kernel & repo](https://github.com/kaplan2539/CHIP-Debian-Kernel) - ([forum thread](https://bbs.nextthing.co/t/new-kernel-4-4-138/20894)) // [personal mirror repo](/kaplan2539-CHIP-Debian-Kernel/) (2018-07-28) // Probably not tested on a pCHIP?
 >
 > & [How to compile just one kernel module](https://yoursunny.com/t/2018/one-kernel-module/) / ([simple stupid .html copy](yoursunny.com-one-kernel-module.html))
 >
-> — [v10lator's kernel repo](https://chiprepo.home.v10lator.de/) - ([forum thread](https://bbs.nextthing.co/t/release-alternative-community-driven-kernel/18818)) // [info txt](v10lator-kernel.txt) / [personal mirror repo](/v10lator-kernel/) (2018-28-07) // ([WARC](misc-files/bbs-ntc-release-alternative-community-driven-kernel-18818.warc.gz)) // i think it hasn't been tested on a pCHIP & *won't work on a pCHIP*
+> — [v10lator's kernel repo](https://chiprepo.home.v10lator.de/) - ([forum thread](https://bbs.nextthing.co/t/release-alternative-community-driven-kernel/18818)) // [info txt](v10lator-kernel.txt) / [personal mirror repo](/v10lator-kernel/) (2018-07-28) // ([WARC](misc-files/bbs-ntc-release-alternative-community-driven-kernel-18818.warc.gz)) // i think it hasn't been tested on a pCHIP & *won't work on a pCHIP*
 >
 > — [a personal HOWTO to compile the Linux kernel for Chip](http://www.raspibo.org/wiki/index.php/Compile_the_Linux_kernel_for_Chip:_my_personal_HOWTO) - ([WBM](https://web.archive.org/web/20180731160444/http://www.raspibo.org/wiki/index.php/Compile_the_Linux_kernel_for_Chip:_my_personal_HOWTO)) & [on the CHIP itself](http://www.raspibo.org/wiki/index.php/HOW-TO_compile_Chip%27s_Linux_kernel_and_modules_on_Chip_itself)
 >
@@ -94,14 +111,17 @@ deb http://chip.lotek.fr/chip/debian/pocketchip jessie main
 
  — CHIPMAS [github](https://github.com/nyboer/CHIPMAS), [hackter.io](https://chip.hackster.io/11802/c-h-i-p-midi-arpeggiating-synth-e311ab), CHIP MIDI Arpeggiating Synthesizer is a simple Pure Data synthesizer. Wavetable synth, control by OSC/MIDI. 
 
- — [pocket-home freedesktop launcher](https://github.com/centuryglass/PocketCHIP-pocket-home), application launcher that follows the freedesktop standard
-
-
- — [pocketInstaller](https://github.com/IkerGarcia/PocketInstaller), a GUI to install emulators/games
 
  — [wlan_pwr](https://github.com/fordsfords/wlan_pwr), improve CHIP wireless perf and reliability by turning off power mgt 
 
  — [PocketDESK](https://github.com/AllGray/PocketDesk), unify Desktop GUI & PocketHome
+ 
+ — [PocketCHIP Launcher](https://github.com/o-marshmallow/PocketCHIP-pocket-home) (Marshmallow Edition)
+ 
+ — [pocket-home freedesktop launcher](https://github.com/centuryglass/PocketCHIP-pocket-home), application launcher that follows the freedesktop standard
+
+
+ — [pocketInstaller](https://github.com/IkerGarcia/PocketInstaller), a GUI to install emulators/games
 
 — [Running Processing on NTC's CHIP](https://github.com/processing/processing/wiki/C.H.I.P.) + [Processing 3+ sketches optimized for the PocketCHIP](https://github.com/Lana-chan/chip-processing)
 

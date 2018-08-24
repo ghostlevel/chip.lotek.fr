@@ -10,7 +10,7 @@
  :                              
 </pre>
 
-(latest modification: 2018-08-16)
+(latest modification: 2018-08-23)
 ***
 
 ## archives/backups/mirrors
@@ -45,7 +45,9 @@ Pin-Priority: 1050
 - [chp-images](/chp-images/) - partial
 - [CHIP Flasher Chrome extension](/misc-files/CHIP%20Flasher%205.0.0_0.zip)
 
-> 2018-08-06: The online flasher doesn't work anymore, follow CLI/terminal guides do flash from a Linux machine.
+> 2018-08-06: The online flasher doesn't work anymore, follow CLI/terminal guides to flash from a Linux machine.
+
+> 2018-08-23: [online Flasher replacement](https://fc.fdf.net) with [its modified Chrome extension](https://fc.fdf.net/extension.zip) // ([forum post](https://bbs.nextthing.co/t/planning-for-the-inevitable/19958/116))
 
 
 
@@ -64,13 +66,13 @@ Pin-Priority: 1050
 
  — *[NTC Git Archive](https://archive.org/details/NextThingCo.GitArchive)*
 
- — [How to Flash C.H.I.P Offline](https://yoursunny.com/t/2018/CHIP-flash-offline/) / ([simple stupid .html copy](yoursunny.com-how-to-flash-CHIP-offline.html))
+ — [How to Flash C.H.I.P Offline](https://yoursunny.com/t/2018/CHIP-flash-offline/) / ([simple stupid .html copy](misc-files/yoursunny.com-how-to-flash-CHIP-offline.html))
 
  — [Reflashing The PocketCHIP Without The Online Flasher (On Linux) - pdf](/misc-files/Reflashing%20The%20PocketCHIP%20Without%20The%20Online%20Flasher%20On%20Linux.pdf) / ([og thread](https://bbs.nextthing.co/t/reflashing-the-pocketchip-without-the-online-flasher-on-linux/20614/4))
 
  — [CHIP_IO](https://github.com/xtacocorex/CHIP_IO), A CHIP IO library for Python: IO+PWM+SPWM+ADC+Utilities
 
- — [NTC's documentation on the Wayback Machine](https://web.archive.org/web/20161119024310/http://docs.getchip.com:80/) // or download the [archive file](/misc-files/docs.getchip.com.tar.bz2)
+ — [NTC's documentation on the Wayback Machine](https://web.archive.org/web/20161119024310/http://docs.getchip.com:80/) // or download the [archive file](misc-files/docs.getchip.com.tar.bz2)
 
 
 
@@ -80,7 +82,7 @@ Pin-Priority: 1050
 >
 > — [kaplan2539 unofficial's kernel & repo](https://github.com/kaplan2539/CHIP-Debian-Kernel) - ([forum thread](https://bbs.nextthing.co/t/new-kernel-4-4-138/20894)) // [personal mirror repo](/kaplan2539-CHIP-Debian-Kernel/) (2018-07-28) // Probably not tested on a pCHIP?
 >
-> & [How to compile just one kernel module](https://yoursunny.com/t/2018/one-kernel-module/) / ([simple stupid .html copy](yoursunny.com-one-kernel-module.html))
+> & [How to compile just one kernel module](https://yoursunny.com/t/2018/one-kernel-module/) / ([simple stupid .html copy](misc-files/yoursunny.com-one-kernel-module.html))
 >
 > — [v10lator's kernel repo](https://chiprepo.home.v10lator.de/) - ([forum thread](https://bbs.nextthing.co/t/release-alternative-community-driven-kernel/18818)) // [info txt](v10lator-kernel.txt) / [personal mirror repo](/v10lator-kernel/) (2018-07-28) // ([WARC](misc-files/bbs-ntc-release-alternative-community-driven-kernel-18818.warc.gz)) // i think it hasn't been tested on a pCHIP & *won't work on a pCHIP*
 >
@@ -105,7 +107,7 @@ Pin-Priority: 1050
 
  — [extend life of the NAND/flash](http://www.chip-community.org/index.php/Flash#Extend_life), ramdisks, etc. 
 
- — [turning CHIP into a BT Audio Receiver (Audio Sink) & Guide to connecting to a Bluetooth Speaker](http://chip.lotek.fr/misc-files/CHIP-into-BT-Audio-Receiver+connecting-to-BT-speaker.md) txt/md copy 
+ — [turning CHIP into a BT Audio Receiver (Audio Sink) & Guide to connecting to a Bluetooth Speaker](misc-files/CHIP-into-BT-Audio-Receiver+connecting-to-BT-speaker.md) txt/md copy 
 
  — [ElKentaro's HackCHIP V1. (part 1/n)](https://medium.com/@elkentaro/hackerchip-v-1-part-1-of-n-59804d27c245)
 

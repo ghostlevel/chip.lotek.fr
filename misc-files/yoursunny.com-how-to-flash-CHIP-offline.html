@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>How to Flash C.H.I.P Offline</title>
+
+
+<div><p>from: https://yoursunny.com/t/2018/CHIP-flash-offline/</p></div>
+
+
+<h1>
+How to Flash C.H.I.P Offline
+</h1>
+<div class="site-byline">
+<address>Junxiao Shi</address>
+<a href="/t/2018/CHIP-flash-offline/"><time datetime="2018-02-25T05:00:00.000Z">2018-02-25</time></a>
+</div>
+
+<div>
+<p>Next Thing Co (NTC), the company that made the $9 C.H.I.P computer, is <a href="https://bbs.nextthing.co/t/is-c-h-i-p-dead/20091" target="_blank" rel="noopener">not doing well</a>: orders are not shipping on time, and support is not answering emails.
+While the little CHIPs would still work even if NTC no longer exists, same cannot be said for firmware flashing: the recommended method for flashing firmware is through Chrome App developed by NTC, which in turn downloads from NTC&#39;s file servers.
+If Next Thing Co evaporates and their file servers go offline, the Chrome App would not be able to download the firmware, and therefore I cannot re-flash my CHIPs if I ever mess up their operating system.</p>
+<p>To keep my C.H.I.Ps working for as long as possible, I have to <a href="https://bbs.nextthing.co/t/planning-for-the-inevitable/19958" target="_blank" rel="noopener">plan for the inevitable</a> and find out how to flash a CHIP without relying on the Internet, or at least, without relying on the <code>opensource.nextthing.co</code> file server.
+NTC has published some scripts, known as <a href="https://github.com/NextThingCo/CHIP-tools" target="_blank" rel="noopener">CHIP-tools</a>, to work with CHIP computers.
+The <code>chip-update-firmware.sh</code> script is a command line tool to flash the device.
+While the content of this script is complicated, to make it work offline, I just need to figure out what it needs from NTC file servers, and download these files in advance.</p>
+<p>A brief read and tests indicate that <code>chip-update-firmware.sh</code> has the following workflow:</p>
+<ol>
+<li>Verify all necessary programs are available.</li>
+<li>Select a <em>flavor</em> according to command line arguments. It is one of <code>server</code>, <code>gui</code>, <code>pocketchip</code>, and <code>buildroot</code>.</li>
+<li>Download a <code>latest</code> file that contains the latest firmware version number.</li>
+<li>Download SPL, sunxi, and U-Boot images.</li>
+<li>Connect to CHIP in FEL mode, and determine whether the CHIP has a Hynix or Toshiba NAND chip.</li>
+<li>Download CHIP operating system image that suitable for the NAND chip.</li>
+<li>Connect to CHIP in Fastboot mode, and send the operating system image to CHIP.</li>
+</ol>
+<p>Files for each flavor is hosted in a different directory on the file server.
+For <code>server</code> flavor, the files are:</p>
+<p></p><p class="code-caption" data-lang="" data-line_number="backend" data-trim_indent="backend" data-label_position="outer" data-labels_left="" data-labels_right="" data-labels_copy=""><span class="code-caption-label"></span></p><p></p>
+<pre><code># lastest version
+http://opensource.nextthing.co/chip/images/stable/server/latest
+
+# SPL, sunxi, U-Boot
+http://opensource.nextthing.co/chip/images/stable/server/149/spl-40000-1000-100.bin
+http://opensource.nextthing.co/chip/images/stable/server/149/spl-400000-4000-500.bin
+http://opensource.nextthing.co/chip/images/stable/server/149/spl-400000-4000-680.bin
+http://opensource.nextthing.co/chip/images/stable/server/149/sunxi-spl.bin
+http://opensource.nextthing.co/chip/images/stable/server/149/u-boot-dtb.bin
+http://opensource.nextthing.co/chip/images/stable/server/149/uboot-40000.bin
+http://opensource.nextthing.co/chip/images/stable/server/149/uboot-400000.bin
+
+# CHIP operating system for Hynix NAND
+http://opensource.nextthing.co/chip/images/stable/server/149/chip-400000-4000-680.ubi.sparse
+
+# CHIP operating system for Toshiba NAND
+http://opensource.nextthing.co/chip/images/stable/server/149/chip-400000-4000-500.ubi.sparse
+</code></pre><p>I successfully flashed all four flavors onto a Hynix CHIP, using a Raspberry Pi 3 running Ubuntu Mate 16.04 as the host computer.
+My steps were:</p>
+<ol>
+<li>Clone <a href="https://github.com/NextThingCo/CHIP-tools" target="_blank" rel="noopener">CHIP-tools</a> repository to <code>$HOME/CHIP/CHIP-tools</code>.</li>
+<li>Install Ubuntu packages: <code>sudo apt install android-tools-fastboot sunxi-tools u-boot-tools</code>.</li>
+<li>Download SPL, sunxi, U-Boot, and CHIP operating systems images into <code>$HOME/CHIP/stable-server-b149</code>. Internet connection is no longer needed after this step.</li>
+<li>Install a LiPo battery on the CHIP, because Raspberry Pi 3&#39;s USB port cannot supply enough current for CHIP to operate smoothly.</li>
+<li>Ensure CHIP is powered off and not connected to the host computer. Put a jumper wire between FEL and GND pins.</li>
+<li>Execute <code>sudo whoami</code> so that the next command won&#39;t ask for my password again.</li>
+<li>In <code>$HOME/CHIP/CHIP-tools</code> directory, execute <code>FEL=&#39;sudo sunxi-fel&#39; FASTBOOT=&#39;sudo fastboot&#39; SNIB=false ./chip-update-firmware.sh -L ../stable-server-b149</code>.</li>
+<li>When <code>waiting for fel......</code> prompt appears, connect CHIP to the host computer with a microUSB cable.</li>
+<li>When <code>FLASH VERIFICATION COMPLETE.</code> message appears, flashing is successful.</li>
+</ol>
+<p>NTC file server <code>opensource.nextthing.co</code> is still online today, so I can download from them in step 3.
+As it is going to disappear, I have copied the files to <a href="https://dl.bintray.com/yoursunny/CHIP/" target="_blank" rel="noopener">Bintray</a> repository to keep them available.
+Note that CHIP operating system images in my Bintray mirror are compressed by 7-Zip, and they must be manually decompressed before running <code>chip-flash-firmware.sh</code> script.</p>
+
+</div>

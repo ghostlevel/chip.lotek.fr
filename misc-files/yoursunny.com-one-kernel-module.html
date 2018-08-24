@@ -1,0 +1,112 @@
+
+
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src *; media-src *">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="How%20to%20Compile%20Just%20One%20Kernel%20Module_fichiers/aboutReader.css" type="text/css">
+  <script type="text/javascript" src="How%20to%20Compile%20Just%20One%20Kernel%20Module_fichiers/aboutReader.js"></script>
+<link rel="stylesheet" href="How%20to%20Compile%20Just%20One%20Kernel%20Module_fichiers/narrate.css"><title>How to Compile Just One Kernel Module</title><link rel="shortcut icon" href="https://yoursunny.com/favicon.ico"></head>
+
+<body class="light sans-serif loaded">
+  <div class="container font-size5 content-width3">
+    <div class="header reader-header" style="display: block;">
+      <a class="domain reader-domain" href="https://yoursunny.com/t/2018/one-kernel-module/">yoursunny.com</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">How to Compile Just One Kernel Module</h1>
+      <div class="credits reader-credits">Junxiao Shi
+2018-07-18</div>
+      <div class="meta-data">
+        <div class="reader-estimated-time">4-5&nbsp;minutes</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content line-height4" style="display: block;"><div id="readability-page-1" class="page"><div>
+<p>I received two C.H.I.P computers in 2016.
+They come with Linux kernel 4.4.13, but the kernel had limited features.
+When I needed to use the <em>fuse</em> kernel module, I had to <a href="https://yoursunny.com/t/2016/CHIP-wireless-UART/">re-compile the entire kernel</a>, which took a whole day.
+Two years later, I upgraded to a <a href="https://github.com/kaplan2539/CHIP-Debian-Kernel" target="_blank" rel="noopener">newer 4.4.138 kernel</a>, built by community member <em>kaplan2539</em>.
+The kernel comes with more modules including <em>fuse</em>, which is a better situation than the original kernel.</p>
+<p><img src="How%20to%20Compile%20Just%20One%20Kernel%20Module_fichiers/NIC.jpg" alt="DM9601 USB Ethernet adapter plugged into a C.H.I.P computer"></p>
+<p>Recently I acquired a cheap USB Ethernet adapter.
+When I plugged it in, the kernel recognizes a USB device:</p>
+
+<pre><code>chip@chip-b:~$ lsusb | <span>grep</span> Ethernet
+Bus <span>002</span> Device <span>002</span>: ID 0fe6:<span>9700</span> Kontron (Industrial Computer Source / ICS Advent) DM9601 Fast Ethernet Adapter
+</code></pre><p>But there's no new NIC showing up in <code>ip link</code> command.
+A quick Google search of the USB ID <code>0fe6:9700</code> indicates that I need the <em>dm9601</em> kernel module.
+But:</p>
+
+<pre><code>chip@chip-<span>b:</span>~$ sudo modprobe dm9601
+<span>modprobe:</span> <span>FATAL:</span> Module dm9601 <span>not</span> found.
+</code></pre><p>Do I have to spend a whole day re-compiling the kernel?
+It turns out that, I can build a single kernel module individually.
+After some trial and error, I figured out the exact procedure of doing so.</p>
+<ol>
+<li><p>Obtain the kernel headers and the compiler, and download the kernel sources:</p>
+<pre><code>sudo apt <span>install</span> <span>build</span>-essential libncurses-dev linux-headers<span>-4.4</span><span>.138</span>-chip
+curl -L https://github.com/kaplan2539/ntc-linux/<span>archive</span>/ntc-stable-mlc<span>-4.4</span><span>.138</span>.tar.gz | tar xz
+</code></pre><p>It's important that the header package and kernel sources both match the running kernel, which can be seen with <code>uname -r</code> command.</p>
+</li>
+<li><p>Copy the kernel "config" file into the kernel source directory.
+This file records how the kernel was configured when it was originally 
+built, which serves as a starting point of the new compilation process.</p>
+<pre><code><span>cd</span> ntc-linux-ntc-stable-mlc-4.4.138
+cp /boot/config-4.4.138-chip ./.config
+</code></pre></li>
+<li><p>Copy the kernel "symbol" file into the kernel source directory as well.
+This file records what function names exist in the running kernel, so that our new module can link to them.</p>
+<pre><code>cp <span>/usr/src/linux-headers-4.4.138-chip/Module.symvers ./</span>
+</code></pre></li>
+<li><p>Load the original config file, and modify it.</p>
+<pre><code><span>make</span> oldconfig
+make menuconfig
+</code></pre><p>The <code>make menuconfig</code> command brings up an 
+interactive dialog, allowing me to select what kernel features I want.
+I followed the dialogs into "Device Drivers" - "Network device support" -
+ "USB Network Adapters" menu, and changed "Davicom DM96xx based USB 
+10/100 ethernet devices" to "M", indicating this feature would be built 
+as a module.</p>
+</li>
+<li><p>Since the running kernel version is <code>4.4.138-chip</code>, I need to modify <code>Makefile</code> and set <code>EXTRAVERSION = -chip</code>.
+After that, <code>make kernelversion</code> should say <code>4.4.138-chip</code>, exactly matching the output of <code>uname -r</code> command.</p>
+</li>
+<li><p>Build the module.</p>
+<pre><code><span>make</span> scripts prepare modules_prepare
+make -C . M=drivers/net/usb
+</code></pre><p>In this command, <code>drivers/net/usb</code> is the directory containing the <em>dm9601</em> kernel module source code.
+This command would build all enabled kernel modules in that directory, not just <em>dm9601</em>.</p>
+</li>
+<li><p>Install the module.</p>
+<pre><code>sudo cp drivers<span>/net/usb/dm9601.ko /lib/modules/4.4.138-chip/kernel/drivers/net/usb/</span>
+sudo depmod
+</code></pre></li>
+</ol>
+<p>At this point, I'm ready to load the module with <code>modprobe</code>.
+In fact, the module would be loaded automatically when I plug in the USB Ethernet adapter.</p>
+
+<pre><code>chip@chip-b:~$ dmesg | <span>grep</span> -i dm9601
+[<span>270352.048643</span>] dm9601 <span>2</span>-<span>1</span>:<span>1.0</span> eth<span>0</span>: register <span>'dm9601'</span> at usb-<span>1</span>c1440<span>0</span>.usb-<span>1</span>, Davicom DM96xx USB <span>10</span>/<span>100</span> Ethernet, <span>00</span>:e<span>0</span>:<span>4</span>c:<span>53</span>:<span>44</span>:<span>58</span>
+[<span>270352.070843</span>] usbcore: registered new interface driver dm9601
+[<span>270352.923157</span>] dm9601 <span>2</span>-<span>1</span>:<span>1.0</span> eth<span>0</span>: <span>link</span> up, <span>100</span>Mbps, full-duplex, lpa <span>0xFFFF</span>
+</code></pre><p>The whole process took less than an hour, which is a lot less than re-compiling the entire kernel.</p>
+<p>Reference: <a href="https://stackoverflow.com/a/44204152" target="_blank" rel="noopener">Oleg Kokorin's answer to "How to recompile just a single kernel module?"</a></p>
+
+</div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message" style="display: none;"></div>
+    </div>
+  </div>
+
+
+
+
+
+</body></html>
+
